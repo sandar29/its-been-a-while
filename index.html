@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --text: #ffffff;
+            --muted: #8b8b8b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Background Stars */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: .4;
+            animation: blink 4s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 1;
+            }
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .content {
+            max-width: 700px;
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.5s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .small {
+            color: var(--muted);
+            letter-spacing: 4px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .big {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        .text {
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .final {
+            font-size: clamp(50px, 9vw, 100px);
+            font-weight: 600;
+        }
+
+        .name {
+            margin-top: 50px;
+            color: #888;
+            font-size: 18px;
+        }
+
+        .button {
+            margin-top: 40px;
+            display: inline-block;
+            padding: 14px 32px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: .4s;
+        }
+
+        .button:hover {
+            background: white;
+            color: black;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: white;
+            animation: blinkcursor .8s infinite;
+        }
+
+        @keyframes blinkcursor {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <section>
+        <div class="content fade">
+            <div class="small">22 June 2026</div>
+
+            <div style="margin-top:30px;" class="big">
+                <span id="typing"></span><span class="cursor"></span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+            <p class="text">
+                Aku sempat berpikir...
+                <br><br>
+                Apakah kamu masih mengingatku?
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+            <p class="text">
+                Sudah hampir sebelas tahun
+                <br>
+                kita tidak pernah berbicara.
+                <br><br>
+                Dan entah bagaimana,
+                waktu berjalan jauh lebih cepat dari yang kubayangkan.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+            <p class="text">
+                Mungkin sekarang
+                kita sudah memiliki kehidupan,
+                kesibukan,
+                dan cerita yang berbeda.
+                <br><br>
+                Tapi hari ini...
+                aku teringat satu hal.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+            <div class="final">
+                Happy Birthday.
+            </div>
+
+            <p class="text" style="margin-top:40px">
+                Aku harap kamu sehat.
+                <br>
+                Aku harap kamu bahagia.
+                <br>
+                Aku harap semua hal baik
+                menemukan jalannya kepadamu.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+            <p class="text">
+                Dan mungkin...
+                <br><br>
+                Kalau aku diberi kesempatan lagi,
+                aku ingin kita bisa berbincang seperti dulu,
+                <br><br>
+                Bukan untuk mengulang masa lalu,
+                hanya ingin mendengar bagaimana hidup memperlakukanmu
+                selama sebelas tahun yang telah berlalu.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="content fade">
+
+            <div class="big">
+                Take Care.
+            </div>
+
+            <div class="name">
+                — Rifky Sandaryullah
+            </div>
+
+            <!-- Ganti link WA -->
+            <a class="button" href="https://wa.me/6285232380771" target="_blank">
+                Say Hi →
+            </a>
+
+        </div>
+    </section>
+
+    <script>
+
+        // Typing Effect
+
+        const text = "Hi.\nIt's been a while.";
+        let i = 0;
+
+        function typing() {
+            if (i < text.length) {
+
+                document.getElementById("typing").innerHTML +=
+                    text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+
+                i++;
+                setTimeout(typing, 120);
+            }
+        }
+
+        typing();
+
+
+        // Scroll Animation
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        document.querySelectorAll('.fade').forEach(el => {
+            observer.observe(el);
+        });
+
+
+        // Stars
+
+        const stars = document.getElementById('stars');
+
+        for (let i = 0; i < 120; i++) {
+
+            let star = document.createElement('div');
+            star.classList.add('star');
+
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+
+            star.style.animationDelay =
+                Math.random() * 5 + 's';
+
+            stars.appendChild(star);
+        }
+
+    </script>
+
+</body>
+
+</html>
