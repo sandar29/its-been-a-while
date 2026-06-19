@@ -2,6 +2,15 @@
 <html lang="id">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TW4V7LH0KX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-TW4V7LH0KX');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Its Been a While</title>
@@ -238,9 +247,12 @@
             </div>
 
             <!-- Ganti link WA -->
-            <a class="button" href="https://wa.me/6285232380771" target="_blank">
-                Say Hi →
-            </a>
+           <a class="button"
+   id="sayHiBtn"
+   href="https://wa.me/6285232380771"
+   target="_blank">
+   Say Hi →
+</a>
 
         </div>
     </section>
@@ -300,6 +312,70 @@
 
             stars.appendChild(star);
         }
+
+        // =====================
+// ANALYTICS TRACKING
+// =====================
+
+// Event ketika website dibuka
+gtag('event', 'website_opened');
+
+const startTime = Date.now();
+
+
+// Track waktu berada di website
+window.addEventListener('beforeunload', () => {
+
+    const duration = Math.floor((Date.now() - startTime) / 1000);
+
+    gtag('event', 'time_spent', {
+        seconds: duration
+    });
+
+});
+
+
+// Track tombol Say Hi
+document.getElementById('sayHiBtn').addEventListener('click', () => {
+
+    gtag('event', 'say_hi_clicked');
+
+});
+
+
+// Track persentase membaca
+let sent25 = false;
+let sent50 = false;
+let sent75 = false;
+let sent100 = false;
+
+window.addEventListener('scroll', () => {
+
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = (scrollTop / docHeight) * 100;
+
+    if (percent >= 25 && !sent25) {
+        sent25 = true;
+        gtag('event', 'read_25_percent');
+    }
+
+    if (percent >= 50 && !sent50) {
+        sent50 = true;
+        gtag('event', 'read_50_percent');
+    }
+
+    if (percent >= 75 && !sent75) {
+        sent75 = true;
+        gtag('event', 'read_75_percent');
+    }
+
+    if (percent >= 99 && !sent100) {
+        sent100 = true;
+        gtag('event', 'read_completed');
+    }
+
+});
 
     </script>
 
