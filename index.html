@@ -8,7 +8,6 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-
 gtag('config', 'G-TW4V7LH0KX');
 </script>
 
@@ -19,14 +18,17 @@ gtag('config', 'G-TW4V7LH0KX');
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "x9aslhitvj");
 </script>
-    <meta property="og:title" content="It's Been a While..." />
-<meta property="og:description" content="" />
-<meta property="og:image" content="https://sandar29.github.io/its-been-a-while/preview.jpg" />
-<meta property="og:url" content="https://sandar29.github.io/its-been-a-while/" />
-<meta property="og:type" content="website" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Its Been a While</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="It's Been a While..." />
+    <meta property="og:description" content="Sudah hampir sebelas tahun. Tapi hari ini, aku teringat satu hal." />
+    <meta property="og:image" content="https://sandar29.github.io/its-been-a-while/preview.jpg" />
+    <meta property="og:url" content="https://sandar29.github.io/its-been-a-while/" />
+    <meta property="og:type" content="website" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -54,8 +56,6 @@ gtag('config', 'G-TW4V7LH0KX');
             overflow-x: hidden;
         }
 
-        /* Background Stars */
-
         .stars {
             position: fixed;
             inset: 0;
@@ -74,9 +74,7 @@ gtag('config', 'G-TW4V7LH0KX');
         }
 
         @keyframes blink {
-            50% {
-                opacity: 1;
-            }
+            50% { opacity: 1; }
         }
 
         section {
@@ -158,9 +156,7 @@ gtag('config', 'G-TW4V7LH0KX');
         }
 
         @keyframes blinkcursor {
-            50% {
-                opacity: 0;
-            }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -172,7 +168,6 @@ gtag('config', 'G-TW4V7LH0KX');
     <section>
         <div class="content fade">
             <div class="small">22 June 2026</div>
-
             <div style="margin-top:30px;" class="big">
                 <span id="typing"></span><span class="cursor"></span>
             </div>
@@ -221,7 +216,6 @@ gtag('config', 'G-TW4V7LH0KX');
             <div class="final">
                 Happy Birthday.
             </div>
-
             <p class="text" style="margin-top:40px">
                 Aku harap kamu sehat.
                 <br>
@@ -250,39 +244,48 @@ gtag('config', 'G-TW4V7LH0KX');
 
     <section>
         <div class="content fade">
-
             <div class="big">
                 Take Care.
             </div>
-
             <div class="name">
                 — Rifky Sandaryullah
             </div>
-
-            <!-- Ganti link WA -->
-           <a class="button"
-   id="sayHiBtn"
-   href="https://wa.me/6285232380771"
-   target="_blank">
-   Say Hi →
-</a>
-
+            <a class="button" id="sayHiBtn" href="https://wa.me/6285232380771" target="_blank">
+                Say Hi →
+            </a>
         </div>
     </section>
 
     <script>
 
-        // Typing Effect
+        // =====================
+        // TELEGRAM BOT
+        // =====================
+        const TG_TOKEN = '8980854001:AAFInd3VAC5Z_cjISNV6yJqx6Kn8fj8eOW0';
+        const TG_CHAT  = '7614937418';
 
+        function sendTelegram(msg) {
+            fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'HTML' })
+            }).catch(() => {});
+        }
+
+        function getTime() {
+            return new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // =====================
+        // TYPING EFFECT
+        // =====================
         const text = "Hi.\nIt's been a while.";
         let i = 0;
 
         function typing() {
             if (i < text.length) {
-
                 document.getElementById("typing").innerHTML +=
                     text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-
                 i++;
                 setTimeout(typing, 120);
             }
@@ -290,108 +293,86 @@ gtag('config', 'G-TW4V7LH0KX');
 
         typing();
 
-
-        // Scroll Animation
-
+        // =====================
+        // SCROLL ANIMATION
+        // =====================
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
                 }
             });
-        }, {
-            threshold: 0.2
-        });
+        }, { threshold: 0.2 });
 
-        document.querySelectorAll('.fade').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-
-        // Stars
-
+        // =====================
+        // STARS
+        // =====================
         const stars = document.getElementById('stars');
-
         for (let i = 0; i < 120; i++) {
-
             let star = document.createElement('div');
             star.classList.add('star');
-
             star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-
-            star.style.animationDelay =
-                Math.random() * 5 + 's';
-
+            star.style.top  = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 5 + 's';
             stars.appendChild(star);
         }
 
         // =====================
-// ANALYTICS TRACKING
-// =====================
+        // ANALYTICS + TELEGRAM
+        // =====================
 
-// Event ketika website dibuka
-gtag('event', 'website_opened');
+        // Website dibuka
+        gtag('event', 'website_opened');
+        sendTelegram('👀 <b>Website dibuka!</b>\n🕐 Jam ' + getTime());
 
-const startTime = Date.now();
+        const startTime = Date.now();
 
+        // Waktu di website
+        window.addEventListener('beforeunload', () => {
+            const duration = Math.floor((Date.now() - startTime) / 1000);
+            gtag('event', 'time_spent', { seconds: duration });
+            sendTelegram('🚪 <b>Dia menutup website</b>\n⏱ Waktu baca: ' + duration + ' detik');
+        });
 
-// Track waktu berada di website
-window.addEventListener('beforeunload', () => {
+        // Tombol Say Hi
+        document.getElementById('sayHiBtn').addEventListener('click', () => {
+            gtag('event', 'say_hi_clicked');
+            sendTelegram('💬 <b>DIA KLIK SAY HI!!!</b> 🎉\n🕐 Jam ' + getTime());
+        });
 
-    const duration = Math.floor((Date.now() - startTime) / 1000);
+        // Persentase membaca
+        let sent25 = false, sent50 = false, sent75 = false, sent100 = false;
 
-    gtag('event', 'time_spent', {
-        seconds: duration
-    });
+        window.addEventListener('scroll', () => {
+            const scrollTop  = window.scrollY;
+            const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+            const percent    = (scrollTop / docHeight) * 100;
 
-});
-
-
-// Track tombol Say Hi
-document.getElementById('sayHiBtn').addEventListener('click', () => {
-
-    gtag('event', 'say_hi_clicked');
-
-});
-
-
-// Track persentase membaca
-let sent25 = false;
-let sent50 = false;
-let sent75 = false;
-let sent100 = false;
-
-window.addEventListener('scroll', () => {
-
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const percent = (scrollTop / docHeight) * 100;
-
-    if (percent >= 25 && !sent25) {
-        sent25 = true;
-        gtag('event', 'read_25_percent');
-    }
-
-    if (percent >= 50 && !sent50) {
-        sent50 = true;
-        gtag('event', 'read_50_percent');
-    }
-
-    if (percent >= 75 && !sent75) {
-        sent75 = true;
-        gtag('event', 'read_75_percent');
-    }
-
-    if (percent >= 99 && !sent100) {
-        sent100 = true;
-        gtag('event', 'read_completed');
-    }
-
-});
+            if (percent >= 25 && !sent25) {
+                sent25 = true;
+                gtag('event', 'read_25_percent');
+                sendTelegram('📖 Sudah baca <b>25%</b> — mulai penasaran nih\n🕐 Jam ' + getTime());
+            }
+            if (percent >= 50 && !sent50) {
+                sent50 = true;
+                gtag('event', 'read_50_percent');
+                sendTelegram('📖 Sudah baca <b>50%</b> — lagi di tengah-tengah\n🕐 Jam ' + getTime());
+            }
+            if (percent >= 75 && !sent75) {
+                sent75 = true;
+                gtag('event', 'read_75_percent');
+                sendTelegram('📖 Sudah baca <b>75%</b> — hampir selesai!\n🕐 Jam ' + getTime());
+            }
+            if (percent >= 99 && !sent100) {
+                sent100 = true;
+                gtag('event', 'read_completed');
+                sendTelegram('✅ <b>Selesai membaca semua!</b>\n🕐 Jam ' + getTime());
+            }
+        });
 
     </script>
 
 </body>
-
 </html>
